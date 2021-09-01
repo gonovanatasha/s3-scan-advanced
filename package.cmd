@@ -1,0 +1,1 @@
+sam package --template-file package.yaml --output-template-file deploy.yaml --s3-bucket s3-scan-n  
