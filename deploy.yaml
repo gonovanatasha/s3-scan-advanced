@@ -13,7 +13,7 @@ Parameters:
     Type: String
     Description: Specifies if the bucket to hold the AV deinitions should be "public"
       or "private". Only choose "public" if other accounts need to access this bucket."
-    Default: public
+    Default: private
     AllowedValues:
     - public
     - private
@@ -29,7 +29,7 @@ Parameters:
     Description: Name of the infected bucket where objects will be send after scanned
       if they are infected. If more than one source bucket, the others will have to
       be manually added to the AV Scanner Policy after creation.
-    Default: infected-files
+    Default: infected-files-av
     AllowedPattern: .+
   AVScannerFunction:
     Type: String
@@ -462,16 +462,6 @@ Resources:
         - - LambdaAV
           - Ref: AWS::StackId
       VpcId: vpc-0b13ba3cd36b642f0
-      SecurityGroupIngress:
-      - IpProtocol: tcp
-        FromPort: 80
-        ToPort: 80
-        CidrIp: '0.0.0.0/0'
-      SecurityGroupEgress:
-      - IpProtocol: tcp
-        FromPort: 80
-        ToPort: 80
-        CidrIp: '0.0.0.0/0'
   LambdaAVInfected:
     Type: AWS::Lambda::Function
     Properties:
